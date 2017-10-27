@@ -8,6 +8,7 @@ GameArea.prototype.start = function (){
   this.canvas.height = 350;
   this.context = this.canvas.getContext("2d");
   document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        //Generamos un setInterval para actualizar en todo momento el juego
   this.interval = setInterval(updateGameArea, 20);
 }
 GameArea.prototype.clear = function () {

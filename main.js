@@ -2,7 +2,7 @@ var myObstacles = [];
 var player;
 var myGameArea;
 $( document ).ready(function() {
-  //Ejecuta todo el codigo , fijense paso a paso el flujo 
+            //Ejecuta todo el codigo , fijense paso a paso el flujo
   myGameArea = new GameArea();
   myGameArea.start();
   player = new Obstacle(30, 30, "red", 0, 110);
@@ -11,6 +11,9 @@ $( document ).ready(function() {
 
 function updateGameArea() {
     for (i = 0; i < myObstacles.length; i += 1) {
+            //Podrán ver por consola que esta condicion es False todo el tiempo
+            //hasta que hay una colision
+      console.log(player.crashWith(myObstacles[i]))
         if (player.crashWith(myObstacles[i])) {
             myGameArea.stop();
             return;
@@ -18,6 +21,8 @@ function updateGameArea() {
     }
     myGameArea.clear();
     myGameArea.frames +=1;
+            //Solo entramos dentro de la condicion "if" cuando "myGameArea.frames"
+            //llega a un multiplo de 100, dentro de ella generamos Obstacles dinamicamente
     if (myGameArea.frames % 100 === 0) {
         x = myGameArea.canvas.width;
         minHeight = 20;
@@ -29,12 +34,14 @@ function updateGameArea() {
         myObstacles.push(new Obstacle(10, height, "green", x, 0));
         myObstacles.push(new Obstacle(10, x - height - gap, "green", x, height + gap));
     }
-
+            //Con el bucle for, recorremos el array de Objetos "obstacles" para mover
+            //hacia la izquierda todos los objetos
     for (i = 0; i < myObstacles.length; i++) {
 
         myObstacles[i].x -= 1;
         myObstacles[i].update();
     }
+          //Por ultimo lo unico que hacemos es renderizar el player para refrescar su posicion
     player.newPos();
     player.update();
     myGameArea.score();

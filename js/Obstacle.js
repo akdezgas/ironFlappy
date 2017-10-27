@@ -25,6 +25,9 @@ Obstacle.prototype.top = function(){  return this.y }
 Obstacle.prototype.bottom = function(){ return this.y + this.height }
 
 Obstacle.prototype.crashWith = function(obstacle){
+//Condiciones que usamos para comprobar la colision
+//daros cuenta que devolvemos False cuando dentro de ella se
+//comprueba que son true
   return !((this.bottom() < obstacle.top())    ||
            (this.top()    > obstacle.bottom()) ||
            (this.right()  < obstacle.left())   ||
